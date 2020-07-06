@@ -6,12 +6,23 @@
  * Throw InvalidArgumentException if $minute is negative of greater then 60.
  * @see https://www.php.net/manual/en/class.invalidargumentexception.php
  *
- * @param  int  $minute
+ * @param  int $minute
  * @return string
  * @throws InvalidArgumentException
  */
 function getMinuteQuarter(int $minute)
 {
+    if ($minute >= 1 && $minute <= 15) {
+        return 'first';
+    } elseif ($minute >= 16 && $minute <= 30) {
+        return 'second';
+    } elseif ($minute >= 31 && $minute <= 45) {
+        return "third";
+    } elseif (($minute >= 46 && $minute <= 60) || $minute == 0) {
+        return "fourth";
+    } else {
+        throw new InvalidArgumentException();
+    }
 }
 
 /**
@@ -21,12 +32,20 @@ function getMinuteQuarter(int $minute)
  * @see https://en.wikipedia.org/wiki/Leap_year
  * @see https://www.php.net/manual/en/class.invalidargumentexception.php
  *
- * @param  int  $year
+ * @param  int $year
  * @return boolean
  * @throws InvalidArgumentException
  */
 function isLeapYear(int $year)
 {
+    if ($year <= 1900) {
+        throw new InvalidArgumentException();
+    }
+    if ($year % 2 == 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -36,10 +55,24 @@ function isLeapYear(int $year)
  * Throw InvalidArgumentException if $input contains more then 6 digits.
  * @see https://www.php.net/manual/en/class.invalidargumentexception.php
  *
- * @param  string  $input
+ * @param  string $input
  * @return boolean
  * @throws InvalidArgumentException
  */
 function isSumEqual(string $input)
 {
+    if (strlen($input) > 6 || strlen($input) < 6) {
+        throw new InvalidArgumentException();
+    }
+    $digit = str_split($input, 3);
+    $sumArray = [];
+    foreach ($digit as $key => $part) {
+        $sum = 0;
+        $part = str_split($part);
+        foreach ($part as $value) {
+            $sum += $value;
+        }
+        $sumArray[$key] = $sum;
+    }
+    return $sumArray[0] == $sumArray[1] ? true : false;
 }
