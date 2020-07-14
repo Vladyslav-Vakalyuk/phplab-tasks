@@ -38,10 +38,10 @@ function getMinuteQuarter(int $minute)
  */
 function isLeapYear(int $year)
 {
-    if ($year <= 1900) {
+    if ($year < 1900) {
         throw new InvalidArgumentException();
     }
-    if ($year % 2 == 0) {
+    if (date("d", strtotime("{$year}-02-29")) == 29) {
         return true;
     } else {
         return false;
@@ -61,18 +61,11 @@ function isLeapYear(int $year)
  */
 function isSumEqual(string $input)
 {
-    if (strlen($input) > 6 || strlen($input) < 6) {
+    if ((strlen($input) != 6)) {
         throw new InvalidArgumentException();
     }
-    $digit = str_split($input, 3);
-    $sumArray = [];
-    foreach ($digit as $key => $part) {
-        $sum = 0;
-        $part = str_split($part);
-        foreach ($part as $value) {
-            $sum += $value;
-        }
-        $sumArray[$key] = $sum;
-    }
-    return $sumArray[0] == $sumArray[1] ? true : false;
+    $digit = str_split($input);
+    $digitArrayOne = array_slice($digit, 0, 3);
+    $digitArrayTwo = array_slice($digit, 3, 6);
+    return array_sum($digitArrayOne) == array_sum($digitArrayTwo);
 }
