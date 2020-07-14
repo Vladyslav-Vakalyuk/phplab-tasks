@@ -1,7 +1,9 @@
 {
     "autoload": {
         "files": [
-            "src/01-basics.php"
+            "src/01-basics.php",
+            "src/02-strings.php",
+            "src/03-arrays.php"
         ]
     },
     "require": {
