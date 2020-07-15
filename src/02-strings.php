@@ -4,11 +4,19 @@
  * Transform it into camel cased string and return (i.e. helloWorld or thisIsHomeTask)
  * @see http://xahlee.info/comp/camelCase_vs_snake_case.html
  *
- * @param  string  $input
+ * @param  string $input
  * @return string
  */
 function snakeCaseToCamelCase(string $input)
 {
+    $arr = explode('_', $input);
+    $string = '';
+    foreach ($arr as $key => $value) {
+        $string .= ucfirst($value);
+    }
+    $string = lcfirst($string);
+
+    return $string;
 }
 
 /**
@@ -16,11 +24,32 @@ function snakeCaseToCamelCase(string $input)
  * Mirror each word individually and return transformed text (i.e. 'АВЫФ ждло')
  * !!! do not change words order
  *
- * @param  string  $input
+ * @param  string $input
  * @return string
  */
 function mirrorMultibyteString(string $input)
 {
+    $array = explode(' ', $input);
+    $prepare = [];
+    foreach ($array as $key => $value) {
+        $prepare[] = mb_strrev($value);
+    }
+
+    return implode(' ', $prepare);
+}
+
+/**
+ * @param string $string
+ * @return string
+ */
+function mb_strrev(string $string)
+{
+    $result = '';
+    for ($i = mb_strlen($string); $i >= 0; $i--) {
+        $result .= mb_substr($string, $i, 1);
+    }
+
+    return $result;
 }
 
 /**
@@ -34,9 +63,14 @@ function mirrorMultibyteString(string $input)
  * europe -> Europeurope
  * Implement this logic.
  *
- * @param  string  $noun
+ * @param  string $noun
  * @return string
  */
 function getBrandName(string $noun)
 {
+    $string = $noun;
+    if (substr($string, 0, 1) !== substr($string, -1)) {
+        return "The " . ucfirst($noun);
+    }
+    return ucfirst($noun) . substr($noun, 1);
 }
