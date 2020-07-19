@@ -69,7 +69,7 @@ function mb_strrev(string $string)
 function getBrandName(string $noun)
 {
     $string = $noun;
-    if (mb_substr($string, 0, 1) !== mb_substr($string, -1)) {
+    if (mb_strtolower(mb_substr($string, 0, 1)) !== mb_strtolower(mb_substr($string, -1))) {
         return "The " . ucfirst($noun);
     }
     return ucfirst($noun) . mb_substr($noun, 1);

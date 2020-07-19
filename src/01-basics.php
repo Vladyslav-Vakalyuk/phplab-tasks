@@ -41,11 +41,7 @@ function isLeapYear(int $year)
     if ($year < 1900) {
         throw new InvalidArgumentException();
     }
-    if (date("d", strtotime("{$year}-02-29")) == 29) {
-        return true;
-    } else {
-        return false;
-    }
+    return date("d", strtotime("{$year}-02-29")) == 29;
 }
 
 /**
