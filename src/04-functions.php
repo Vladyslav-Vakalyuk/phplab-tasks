@@ -35,7 +35,9 @@ function sayHelloArgument($arg)
  */
 function sayHelloArgumentWrapper($arg)
 {
-    // put your code here
+    if(!is_numeric($arg) && !is_string($arg) && !is_numeric($arg)){
+        throw new InvalidArgumentException();
+    }
 
     return sayHelloArgument($arg);
 }
@@ -67,7 +69,14 @@ function countArguments()
  * @return array
  * @throws InvalidArgumentException
  */
-function countArgumentsWrapper()
+function countArgumentsWrapper(...$data)
 {
-    // put your code here
+   $checkIsString = array_filter($data, function ($value){
+        return !is_string($value);
+    });
+    if(!empty($checkIsString)){
+        throw new InvalidArgumentException();
+    }
+
+    return countArguments(...$data);
 }
