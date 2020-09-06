@@ -6,12 +6,14 @@
  *
  * Create a PhpUnit test (GetUniqueFirstLettersTest) which will check this behavior
  *
- * @param  array  $airports
+ * @param  array $airports
  * @return string[]
  */
 function getUniqueFirstLetters(array $airports)
 {
     // put your logic here
-
-    return ['A', 'B', 'C'];
+    $result = array_map(function ($item) {
+        return ucfirst(substr($item['name'], 0, 1));
+    }, $airports);
+    return array_unique($result);
 }
