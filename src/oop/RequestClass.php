@@ -8,8 +8,8 @@
 
 class RequestClass
 {
-    public $dataGet = [];
-    public $dataPost = [];
+    public $dataGet;
+    public $dataPost;
     public $userIp;
     public $userAgent = [];
     public $cookies;
@@ -18,13 +18,13 @@ class RequestClass
 
     public function __construct($getMethod, $postMethod, $userIp, $userAgent, CookiesClass $cookies, SessionClass $session, $requestMethod)
     {
-        $this->dataGet[] = $getMethod;
-        $this->dataPost[] = $postMethod;
+        $this->dataGet = $getMethod;
+        $this->dataPost = $postMethod;
         $this->userIp = $userIp;
-        $this->userAgent[] = $userAgent;
+        $this->userAgent = $userAgent;
         $this->cookies = $cookies;
         $this->session = $session;
-        $this->requestMethod[] = $requestMethod;
+        $this->requestMethod = $requestMethod;
     }
 
     public function query($key, $default = null)

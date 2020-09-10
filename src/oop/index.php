@@ -26,16 +26,16 @@ $cookies = new CookiesClass([
 $request = new RequestClass(
 
     [
-        ['get_key_1' => 'get_value_1'],
-        ['get_key_2' => 'get_value_2'],
-        ['get_key_3' => 'get_value_3'],
-        ['get_key_4' => 'get_value_4'],
+        'get_key_1' => 'get_value_1',
+        'get_key_2' => 'get_value_2',
+        'get_key_3' => 'get_value_3',
+        'get_key_4' => 'get_value_4',
     ],
     [
-        ['post_key_1' => 'post_value_1'],
-        ['post_key_2' => 'post_value_2'],
-        ['post_key_3' => 'post_value_3'],
-        ['post_key_4' => 'post_value_4'],
+        'post_key_1' => 'post_value_1',
+        'post_key_2' => 'post_value_2',
+        'post_key_3' => 'post_value_3',
+        'post_key_4' => 'post_value_4',
     ],
     '192.168.0.1',
     'Chrome',
@@ -43,3 +43,12 @@ $request = new RequestClass(
     $session,
     'post'
 );
+var_dump($request->query('get_key_1'));
+var_dump($request->post('post_key_1'));
+var_dump($request->get('get_key_4'));
+var_dump($request->has('post_key_2'));
+var_dump($request->ip());
+var_dump($request->userAgent());
+
+var_dump($request->cookies()->all());
+var_dump($request->session()->all());
